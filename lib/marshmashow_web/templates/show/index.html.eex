@@ -1,0 +1,67 @@
+<ul class="shows-wrapper">
+  <%= for show <- @shows do %>
+    <%= unless Enum.member?(@followed, show.id) do %>
+      <li class="list-style-none">
+        <div class="show-poster">
+          <%= img_tag(Marshmashow.ImageUploader.url({show.image, show}), [class: "show-image-s", data: [link: "#{show_path(@conn, :show, show)}"]]) %>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+  <li class="list-style-none list-empty"></li>
+</ul>

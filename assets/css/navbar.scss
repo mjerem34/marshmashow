@@ -1,0 +1,63 @@
+@import "css/_vars.scss";
+@import "css/fonts.scss";
+
+@media screen and (max-width: 992px){
+  div.searchbox{
+    padding-left: 0;
+  }
+}
+
+@media screen and (min-width: 993px){
+  div.searchbox{
+    padding-left: 240px;
+  }
+}
+
+div.searchbox{
+  div.card{
+    background: $white;
+    height: 50px;
+    div.card-content{
+      padding: 2px;
+      .btn-menu, .btn-search{
+        font-size: 25px;
+        i{
+          color: $grey !important;
+          vertical-align: sub;
+        }
+      }
+      #search{
+        color: $grey;
+        border-bottom: none;
+      }
+      #search::-moz-placeholder{
+        color: #000;
+        opacity: 1;
+      }
+      .btn-search{
+        float: right;
+      }
+      div.brand-logo{
+        position: absolute;
+        color: $grey;
+        top: 5px;
+        left: 15%;
+        width: 70%;
+        font-size: 2rem;
+        text-align: center;
+        font-family: "Pacifico";
+        font-weight: 500;
+      }
+      @media screen and (max-width: 992px){
+        .btn-menu{
+          display: block;
+        }
+      }
+      @media screen and (min-width: 993px){
+        .btn-menu{
+          display: none;
+        }
+      }
+    }
+  }
+}

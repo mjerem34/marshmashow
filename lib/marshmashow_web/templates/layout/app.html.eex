@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="csrf" content="<%= Plug.CSRFProtection.get_csrf_token() %>">
+
+  <title>Hello Marshmashow!</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  <script src="https://use.fontawesome.com/99b1829551.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="searchbox">
+      <div class="row">
+        <div class="col s10 m10 l10 xl10 offset-s1 offset-m1 offset-l1 offset-xl1">
+          <div class="card">
+            <div class="card-content">
+              <div class="row">
+                <div class="col s1"><a href="#" data-activates="slide-out" class="btn-menu"><%= fa_icon("bars") %></a></div>
+                <div class="col s10">
+                  <%= form_for @conn, show_path(@conn, :search), [as: :search, class: "brand-logo"], fn f -> %>
+                  <%= text_input(f, :title, class: "form-control", id: "search", placeholder: "Marshmashow") %>
+                  <% end %>
+                  <div class="brand-logo">Marshmashow</div>
+                </div>
+                <div class="col s1"><a href="#" class="btn-search"><%= fa_icon("search") %></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <aside id="left-sidebar-nav">
+      <ul id="slide-out" class="side-nav fixed leftside-navigation ps-container ps-active-y" style="width: 240px;">
+
+        <%= if @conn.assigns[:user] do %>
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="https://marshmashow-s3.s3.amazonaws.com/639.jpg" alt="">
+            </div>
+            <a href="#!email"><span class="email"><%= @conn.assigns.user.email %></span></a>
+          </div>
+        </li>
+        <li><a class="subheader">Shows</a></li>
+        <li>
+          <%= link to: user_path(@conn, :my_shows), class: "waves-effect waves-light btn-flat current" do %>
+          <%= fa_icon("film") %> My shows
+          <%= end %>
+        </li>
+        <li><a href="#!" class="waves-effect waves-light btn-flat not-current"><%= fa_icon("star") %>Favorites</a></li>
+        <li><a href="#!" class="waves-effect waves-light btn-flat not-current"><%= fa_icon("forward") %>Next</a></li>
+        <li><a href="#!" class="waves-effect waves-light btn-flat not-current"><%= fa_icon("calendar") %>Upcoming</a></li>
+        <li><a class="subheader" class="waves-effect waves-light btn-flat not-current">Experiment</a></li>
+        <li>
+          <%= link to: show_path(@conn, :index), class: "waves-effect waves-light btn-flat not-current" do %>
+          <%= fa_icon("compass") %> Discover
+          <%= end %>
+        </li>
+        <li><a href="#!" class="waves-effect waves-light btn-flat not-current"><%= fa_icon("random") %>Random</a></li>
+        <li><a class="subheader">Community</a></li>
+        <li><a href="#!" class="waves-effect waves-light btn-flat not-current"><%= fa_icon("user") %>Friends</a></li>
+        <li>
+          <%= link to: auth_path(@conn, :signout), class: "waves-effect waves-light btn-flat not-current" do %>
+          <%= fa_icon("sign-out") %> Signout
+          <% end %>
+        </li>
+        <% else %>
+        <li>
+          <%= link to: auth_path(@conn, :request, "google"), class: "waves-effect btn-flat waves-light" do %>
+          <%= fa_icon("google") %>
+          Login
+          <% end %>
+          <% end %>
+        </ul>
+      </aside>
+    </header>
+    <div class="content">
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+        <div class="fixed-action-btn toolbar">
+          <a class="btn-floating btn-large red">
+            <%= fa_icon("ellipsis-h") %>
+          </a>
+          <ul>
+            <li>
+              <a class="waves-effect waves-light btn-flat modal-trigger" href="#modal-search"><%= fa_icon("search") %></a>
+            </li>
+            <%= if @conn.assigns[:user] do %>
+            <li>
+              <%= link(to: user_path(@conn, :my_shows), class: "waves-effect waves-light btn-flat not-current tooltipped", data: [position: "bottom", delay: "50", tooltip: "My shows"]) do %>
+              <%= fa_icon("film") %>
+              <%= end %>
+            </li>
+            <li>
+              <%= link to: show_path(@conn, :index), class: "waves-effect waves-light btn-flat not-current" do %>
+              <%= fa_icon("compass") %>
+              <%= end %>
+            </li>
+            <li>
+              <%= link to: auth_path(@conn, :signout), class: "waves-effect waves-light btn-flat not-current" do %>
+              <%= fa_icon("sign-out") %>
+              <% end %>
+            </li>
+            <% else %>
+            <li>
+              <%= link to: auth_path(@conn, :request, "google"), class: "waves-effect btn-flat waves-light" do %>
+              <%= fa_icon("google") %>
+              Login
+              <% end %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div id="modal-search" class="modal">
+          <div class="modal-content">
+            <h4>Search</h4>
+            <%= form_for @conn, show_path(@conn, :search), [as: :search], fn f -> %>
+            <div class="form-group">
+              <%= text_input(f, :title, class: "form-control", value: "", placeholder: "Search for show") %>
+              <%= error_tag f, :title %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= submit "Search", class: "modal-action modal-close waves-effect waves-green btn-flat" %>
+          </div>
+          <% end %>
+        </div>
+      </main>
+    </div>
+    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+  </html>

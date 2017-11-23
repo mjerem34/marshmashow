@@ -1,0 +1,30 @@
+<h2>Show episode</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @episode.title %>
+  </li>
+
+  <li>
+    <strong>Synopsys:</strong>
+    <%= @episode.synopsys %>
+  </li>
+
+  <li>
+    <strong>Season:</strong>
+    <%= @episode.season %>
+  </li>
+
+  <li>
+    <strong>Number:</strong>
+    <%= @episode.number %>
+  </li>
+
+  <li>
+    <strong>Released:</strong>
+    <%= @episode.released %>
+  </li>
+
+</ul>

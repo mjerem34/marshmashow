@@ -1,0 +1,74 @@
+<div class="show-wrapper">
+  <div class="row">
+    <div class="col s12 m12 l12 xl12">
+      <div class="card">
+        <div class="card-image">
+          <div class="cropped-poster">
+            <%= img_tag(Marshmashow.ImageUploader.url({@show.image, @show})) %>
+          </div>
+          <span class="card-title"><%= @show.title %></span>
+          <%= if @follow do %>
+          <%= link to: show_unfollow_path(@conn, :unfollow, @show), class: "btn-floating halfway-fab waves-effect waves-light red", method: :delete do %>
+          <i class="material-icons">remove</i>
+          <% end %>
+        </h2>
+          <% else %>
+          <%= link to: show_follow_path(@conn, :follow, @show), class: "btn-floating halfway-fab waves-effect waves-light red", method: :post do %>
+          <i class="material-icons">add</i>
+          <% end %>
+        </h2>
+          <% end %>
+        </div>
+        <div class="card-content">
+          <%= raw @show.synopsys %>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m12 l8 xl6">
+      <div class="card">
+        <div class="card-content">
+          <h5>Details</h5>
+          <p><%= @show.start_date %> - <%= @show.end_date %> - <%= @show.network %> - <%= @show.country %> - <%= @show.status %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m12 l4 xl6">
+      <div class="card">
+        <div class="card-content">
+          <h5>Episodes</h5>
+          <table class="bordered striped">
+            <tbody>
+              <%= for episode <- @episodes do %>
+                <tr>
+                  <td>
+                    <%= if Enum.member?(@episodes_watched, episode.id) do %>
+                    <input type="checkbox" class="checkbox-watch" id="episode<%= episode.number %>" data-show="<%= episode.show.id %>" data-episode="<%= episode.id %>" checked/>
+                      <label for="episode<%= episode.number %>"><%= episode.number %></label>
+                    <% else %>
+                    <input type="checkbox" class="checkbox-watch" id="episode<%= episode.number %>" data-show="<%= episode.show.id %>" data-episode="<%= episode.id %>" />
+                      <label for="episode<%= episode.number %>"><%= episode.number %></label>
+                    <% end %>
+                  </td>
+                  <td><%= episode.title %></td>
+                  <td>
+                    <%= episode.released %>
+                  </td>
+                  <td>
+                    <%= episode.duration %> min left
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m12 l12 xl12">
+      <div class="card">
+        <div class="card-content">
+          <h5>Discuss</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

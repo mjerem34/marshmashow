@@ -1,0 +1,60 @@
+@import "node_modules/font-awesome/scss/font-awesome";
+@import "node_modules/materialize-css/sass/materialize.scss";
+@import "css/_vars.scss";
+@import "css/fonts.scss";
+
+body{
+  background: rgb(30,30,30);
+  font-family: "Montserrat";
+  color: $text_color;
+  a{
+    text-transform: none !important;
+  }
+  .fa{
+    color: $text_color !important;
+  }
+}
+
+
+table{
+  tr{
+    cursor: pointer;
+  }
+}
+
+
+.button-collapse{
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+}
+.list-inline{
+  display: inline;
+}
+.list-style-none{
+  list-style: none;
+}
+div.show-poster{
+  float: left;
+  position: relative;
+  padding: 5px;
+}
+span.show-title {
+  background: rgba(0,0,0,0.5);
+  position: absolute;
+  top: 240px;
+  padding-left: 15px;
+  left: 0;
+  width: 100%;
+  font-weight: 900;
+}
+.brand-logo{
+  input::-moz-placeholder {
+      color: $white !important;
+      opacity: 1;
+      font-size: bold;
+  }
+  input{
+    border-width: 0;
+  }
+}

@@ -1,0 +1,10 @@
+@import "css/_vars.scss";
+@import "css/fonts.scss";
+
+.modal{
+  background: $dark;
+  h4{
+
+    color: $text_color;
+  }
+}

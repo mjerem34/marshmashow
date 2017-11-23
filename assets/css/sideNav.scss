@@ -1,0 +1,46 @@
+// Overwriting the side-nav class
+@import "css/_vars.scss";
+@import "css/fonts.scss";
+
+aside#left-sidebar-nav{
+  ul#slide-out{
+    background: $sidebar_color;
+    li{
+      a.not-current{
+        color: $link_color;
+        i{
+          color: $link_color !important;
+          margin-right: 10px !important;
+        }
+      }
+      a.current{
+        color: $blue;
+        i{
+          color: $blue !important;
+        }
+      }
+    }
+    li.logo{
+      background: $blue;
+      a{
+        color: $white;
+        font-weight: 900;
+      }
+    }
+    .subheader{
+      color: $dark_darker !important;
+      font-weight: 900;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  main{
+    // padding-left: 0;
+  }
+}
+@media screen and (min-width: 993px) {
+  main{
+    padding-left: 240px;
+  }
+}

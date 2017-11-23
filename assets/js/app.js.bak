@@ -1,0 +1,67 @@
+import "phoenix_html"
+import "hammerjs"
+import "materialize-css"
+
+$(document).ready(function(){
+
+  $("tr[data-link]").click(function(){
+    window.location = $(this).data("link");
+  });
+  $("td[data-link]").click(function(){
+    window.location = $(this).data("link");
+  });
+  $("img[data-link]").click(function(){
+    window.location = $(this).data("link");
+  });
+
+  $(".followed-btn").mouseenter(function(){
+    $(this).html("Unfollow?");
+  });
+  $(".followed-btn").mouseleave(function(){
+    $(this).html("Followed");
+  });
+
+  $(".btn-menu").sideNav();
+  $('.collapsible').collapsible();
+  $('.tooltipped').tooltip({delay: 50});
+  $('.modal').modal();
+
+  $(".btn-search").click(function(){
+    $("#search").focus();
+  });
+  $("#search").focusin(function(){
+    $("div.brand-logo").css("display", "none");
+  });
+  $("#search").focusout(function(){
+    $("div.brand-logo").css("display", "block");
+    $(this).val("");
+  });
+
+  $(".checkbox-watch").click(function(){
+    var csrf = document.querySelector("meta[name=csrf]").content;
+    $.this = $(this);
+    if (!$.this.prop("checked")) {
+      var show = $.this.data("show");
+      var episode = $.this.data("episode");
+      $.ajax({
+        url: `episode/${episode}/unwatch`,
+        method: "DELETE",
+        dataType: "script",
+        headers: {
+          "X-CSRF-TOKEN": csrf
+        }
+      });
+    }else {
+      var show = $.this.data("show");
+      var episode = $.this.data("episode");
+      $.ajax({
+        url: `episode/${episode}/watch`,
+        method: "POST",
+        dataType: "script",
+        headers: {
+          "X-CSRF-TOKEN": csrf
+        }
+      });
+    }
+  });
+});

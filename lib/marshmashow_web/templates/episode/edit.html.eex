@@ -1,0 +1,5 @@
+<h2>Edit episode of <%= @show.title %></h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: show_episode_path(@conn, :create, @show) %>
+<%= link "Delete", to: show_episode_path(@conn, :delete, @show, @episode), method: :delete %>

@@ -1,0 +1,75 @@
+defmodule MarshmashowWeb do
+  @moduledoc """
+  A module that keeps using definitions for controllers,
+  views and so on.
+
+  This can be used in your application as:
+
+      use MarshmashowWeb, :controller
+      use MarshmashowWeb, :view
+
+  The definitions below will be executed for every view,
+  controller, etc, so keep them short and clean, focused
+  on imports, uses and aliases.
+
+  Do NOT define functions inside the quoted expressions
+  below.
+  """
+
+  def controller do
+    quote do
+      use Phoenix.Controller, namespace: MarshmashowWeb
+      alias Marshmashow.Repo
+      import Plug.Conn
+      import Ecto
+      import Ecto.Query
+
+      import MarshmashowWeb.Router.Helpers
+      import MarshmashowWeb.Gettext
+    end
+  end
+
+  def view do
+    quote do
+      use Phoenix.View, root: "lib/marshmashow_web/templates",
+                        namespace: MarshmashowWeb
+      # Import convenience functions from controllers
+      import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
+
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
+
+      import MarshmashowWeb.Router.Helpers
+      import MarshmashowWeb.ErrorHelpers
+      import MarshmashowWeb.Gettext
+      import FontAwesomePhoenix.HTML
+    end
+  end
+
+  def router do
+    quote do
+      use Phoenix.Router
+      import Plug.Conn
+      import Phoenix.Controller
+    end
+  end
+
+  def channel do
+    quote do
+      import Marshmashow.Gettext
+      use Phoenix.Channel
+
+      alias Marshmashow.Repo
+      import Ecto
+      import Ecto.Query
+      import MarshmashowWeb.Gettext
+    end
+  end
+
+  @doc """
+  When used, dispatch to the appropriate controller/view/etc.
+  """
+  defmacro __using__(which) when is_atom(which) do
+    apply(__MODULE__, which, [])
+  end
+end
