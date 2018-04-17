@@ -4,7 +4,7 @@ defmodule Marshmashow.Mixfile do
   def project do
     [app: :marshmashow,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.6.0-rc.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -30,7 +30,7 @@ defmodule Marshmashow.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.3.0"},
+    [{:phoenix, "~> 1.3.2"},
      {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, ">= 0.0.0"},
@@ -52,7 +52,8 @@ defmodule Marshmashow.Mixfile do
      {:comeonin, "~> 4.0"},
      {:bcrypt_elixir, "~> 0.12.0"},
      {:guardian, "~> 0.14"},
-     {:cors_plug, "~> 1.2"}]
+     {:cors_plug, "~> 1.2"},
+     {:turbolinks, "~> 0.3.2"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

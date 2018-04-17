@@ -19,6 +19,7 @@ defmodule MarshmashowWeb do
   def controller do
     quote do
       use Phoenix.Controller, namespace: MarshmashowWeb
+      use Turbolinks
       alias Marshmashow.Repo
       import Plug.Conn
       import Ecto

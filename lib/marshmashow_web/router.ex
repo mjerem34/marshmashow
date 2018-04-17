@@ -9,6 +9,7 @@ defmodule MarshmashowWeb.Router do
     plug :put_secure_browser_headers
     plug MarshmashowWeb.Plugs.SetUser
     plug NavigationHistory.Tracker
+    plug Turbolinks
   end
 
   pipeline :api do
