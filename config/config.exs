@@ -11,12 +11,11 @@ config :marshmashow,
 
 # Configures the endpoint
 config :marshmashow, MarshmashowWeb.Endpoint,
-  # http: [port: {:system, "80"}, ip: {192,168,43,90}],
-  url: [host: {127,0,0,1}],
+  url: [host: "localhost"],
   secret_key_base: System.get_env("MARSHMASHOW_DEV_SECRET_KEY_BASE"),
-  render_errors: [view: MarshmashowWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Marshmashow.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: MarshmashowsWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Marshmashows.PubSub,
+  live_view: [signing_salt: "TeEQIugC"]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -26,7 +25,7 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
-
+config :phoenix, :json_library, Jason
 # UBERAUTH -------------------------
 # # GOOGLE
 config :ueberauth, Ueberauth,
@@ -38,10 +37,10 @@ config :ueberauth, Ueberauth.Strategy.Google.OAuth,
   client_secret: System.get_env("GOOGLE_OAUTH_CLIENT_SECRET")
 # # UBERAUTH -------------------------
 
-config :guardian, Guardian,
+config :marshmashow, Marshmashow.Guardian,
   allowed_algos: ["HS512"], # optional
   verify_module: Guardian.JWT,  # optional
-  issuer: "Marshmashow",
+  issuer: "marshmashow",
   ttl: { 30, :days },
   allowed_drift: 2000,
   verify_issuer: true, # optional

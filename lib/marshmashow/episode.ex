@@ -8,7 +8,7 @@ import Ecto.Changeset
     field :season, :integer
     field :number, :integer
     field :duration, :integer
-    field :released, Ecto.Date
+    field :released, :naive_datetime
 
     belongs_to(:show, Marshmashow.Show)
     many_to_many(:users, Marshmashow.User, join_through: "users_episodes")
