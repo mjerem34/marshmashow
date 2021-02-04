@@ -1,19 +1,22 @@
 defmodule Marshmashow.Application do
-  use Application
-
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
-  def start(_type, _args) do
-    import Supervisor.Spec
+  @moduledoc false
 
-    # Define workers and child supervisors to be supervised
+  use Application
+
+  def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      supervisor(Marshmashow.Repo, []),
-      # Start the endpoint when the application starts
-      supervisor(MarshmashowWeb.Endpoint, []),
-      # Start your own worker by calling: Marshmashow.Worker.start_link(arg1, arg2, arg3)
-      # worker(Marshmashow.Worker, [arg1, arg2, arg3]),
+      Marshmashow.Repo,
+      # Start the Telemetry supervisor
+      MarshmashowWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Marshmashow.PubSub},
+      # Start the Endpoint (http/https)
+      MarshmashowWeb.Endpoint
+      # Start a worker by calling: Marshmashow.Worker.start_link(arg)
+      # {Marshmashow.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

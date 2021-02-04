@@ -4,10 +4,6 @@ defmodule MarshmashowWeb.UserSocket do
   ## Channels
   # channel "room:*", Marshmashow.RoomChannel
 
-  ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket
-  # transport :longpoll, Phoenix.Transports.LongPoll
-
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
   # verification, you can put default assigns into
@@ -19,12 +15,10 @@ defmodule MarshmashowWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
+  @impl true
+  def connect(_params, socket, _connect_info) do
     {:ok, socket}
   end
-  ## Transports
-  # transport :websocket, Phoenix.Transports.WebSocket,
-  #   timeout: 45_000
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #
@@ -36,5 +30,6 @@ defmodule MarshmashowWeb.UserSocket do
   #     MarshmashowWeb.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
+  @impl true
   def id(_socket), do: nil
 end

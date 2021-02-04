@@ -57,8 +57,8 @@ defmodule MarshmashowWeb do
 
   def channel do
     quote do
-      import Marshmashow.Gettext
       use Phoenix.Channel
+      import Marshmashow.Gettext
 
       alias Marshmashow.Repo
       import Ecto
